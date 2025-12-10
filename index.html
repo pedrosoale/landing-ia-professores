@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>IA para Professores - Planejamento e Avaliações Rápidas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Crie planos, atividades e avaliações completas em minutos com uma IA feita especialmente para professores.">
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --text: #111827;
+      --muted: #4b5563;
+      --border: #e5e7eb;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header,
+    section {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 24px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 6px;
+    }
+
+    ul li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 6px;
+      top: 0;
+      color: var(--primary);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+    }
+
+    .btn-secondary:hover {
+      background: #eff6ff;
+      transform: none;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+
+    .hero-tag span {
+      font-size: 1.1rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .hero-note {
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      color: var(--muted);
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .quote {
+      font-size: 0.9rem;
+      font-style: italic;
+      border-left: 3px solid #dbeafe;
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+
+    .small {
+      font-size: 0.86rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 720px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      header, section {
+        padding: 18px 16px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HERO -->
+    <header>
+      <div class="hero-tag">
+        <span>⚡</span> IA para Professores
+      </div>
+      <h1>Transforme planejamento e avaliações em tarefas rápidas.</h1>
+      <p class="hero-sub">
+        Crie planos, atividades e provas completas em minutos — com uma IA feita especialmente para professores.
+      </p>
+      <div class="btn-row">
+        <a href="https://forms.gle/86sd2WLorC7eYFvr8" target="_blank" class="btn">Quero testar a IA</a>
+        <span class="hero-note small">Funciona para qualquer disciplina. Não precisa saber nada de IA.</span>
+      </div>
+      <div class="pill-list">
+        <div class="pill">Planos de aula</div>
+        <div class="pill">Atividades prontas</div>
+        <div class="pill">Provas e avaliações</div>
+        <div class="pill">Adaptações para turmas diferentes</div>
+      </div>
+    </header>
+
+    <!-- PARA QUEM É -->
+    <section>
+      <h2>Para quem é essa IA?</h2>
+      <p>Para professores que querem:</p>
+      <ul>
+        <li>ganhar tempo no dia a dia;</li>
+        <li>preparar aulas com mais facilidade;</li>
+        <li>montar provas sem ter que começar do zero;</li>
+        <li>criar atividades prontas para usar;</li>
+        <li>organizar melhor o trabalho fora da sala de aula.</li>
+      </ul>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section>
+      <h2>O que mais toma tempo do professor não é a aula.</h2>
+      <p>
+        Grande parte do seu trabalho acontece antes ou depois de entrar na sala:
+      </p>
+      <ul>
+        <li>planejamentos,</li>
+        <li>provas,</li>
+        <li>atividades,</li>
+        <li>adaptações,</li>
+        <li>relatórios e registros.</li>
+      </ul>
+      <p>
+        E quase sempre isso é feito do zero, várias vezes ao ano.
+      </p>
+    </section>
+
+    <!-- SOLUÇÃO -->
+    <section>
+      <div class="two-col">
+        <div>
+          <h2>Uma IA que cria materiais completos para você, de forma rápida e prática.</h2>
+          <p>
+            Com poucos comandos, você pode gerar:
+          </p>
+          <ul>
+            <li>planos de aula prontos para aplicar;</li>
+            <li>avaliações objetivas e discursivas;</li>
+            <li>atividades prontas para imprimir;</li>
+            <li>sequências completas para trabalhar um conteúdo;</li>
+            <li>adaptações para turmas com diferentes níveis;</li>
+            <li>textos, registros e materiais extras.</li>
+          </ul>
+          <p class="highlight">
+            Simples. Rápido. Pronto para usar.
+          </p>
+          <div class="btn-row">
+            <a href="https://forms.gle/86sd2WLorC7eYFvr8" target="_blank" class="btn">Quero entrar na lista de acesso</a>
+          </div>
+        </div>
+        <div>
+          <span class="badge">Como funciona na prática</span>
+          <p class="small">
+            Exemplo de uso:
+          </p>
+          <p class="small">
+            Você digita: <span class="highlight">“Plano de aula — Frações — 6º ano — 50 minutos”</span>
+          </p>
+          <p class="small">
+            A IA gera o plano completo em poucos segundos, com objetivos, etapas e sugestões de atividades.
+          </p>
+          <p class="quote small">
+            A ideia não é substituir você, e sim tirar das suas costas a parte repetitiva e demorada.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- POR QUE QUALQUER PROFESSOR CONSEGUE USAR -->
+    <section>
+      <h2>Qualquer professor consegue usar.</h2>
+      <ul>
+        <li>Interface simples, sem termos difíceis;</li>
+        <li>modelos prontos para você só ajustar e aplicar;</li>
+        <li>resultados claros e fáceis de entender;</li>
+        <li>funciona no celular ou no computador;</li>
+        <li>não exige conhecimento prévio de tecnologia.</li>
+      </ul>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section>
+      <h2>O que professores dizem (dos primeiros testes)</h2>
+      <p class="quote">
+        “Ganhei tempo para preparar minhas aulas.” — Professora M.
+      </p>
+      <p class="quote">
+        “As atividades ficaram prontas em poucos minutos.” — Professor L.
+      </p>
+      <p class="quote">
+        “Usei para adaptar materiais para a minha turma. Salvou meu dia.” — Professora R.
+      </p>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section>
+      <h2>Quer testar a IA antes de todo mundo?</h2>
+      <p>
+        Preencha seus dados e entre na lista de acesso antecipado. Quando a ferramenta estiver liberada para testes, você receberá o link direto no seu e-mail.
+      </p>
+      <div class="btn-row">
+        <a href="https://forms.gle/86sd2WLorC7eYFvr8" target="_blank" class="btn">Quero meu acesso</a>
+      </div>
+    </section>
+
+    <!-- AUTOR -->
+    <section>
+      <h2>Quem criou essa ferramenta?</h2>
+      <p class="highlight">Alexandre Pedroso</p>
+      <ul>
+        <li>Mestre em Matemática (PROFMAT – UFTM);</li>
+        <li>14 anos de experiência em sala de aula;</li>
+        <li>Atuação no Ensino Fundamental e Médio;</li>
+        <li>Especialista em uso prático de IA na educação.</li>
+      </ul>
+      <p class="small">
+        Uma ferramenta criada por um professor, pensando na rotina real de professores.
+      </p>
+    </section>
+
+    <div class="footer">
+      © <span id="year"></span> IA para Professores – Todos os direitos reservados.
+    </div>
+  </div>
+
+  <script>
+    // Ano automático no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
